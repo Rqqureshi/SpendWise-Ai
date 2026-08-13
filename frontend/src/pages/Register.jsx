@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
 function Register() {
   const navigate = useNavigate();
@@ -13,12 +15,33 @@ function Register() {
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const { theme, toggleTheme } = useTheme();
+
+  <button
+  type="button"
+  className="auth-theme-toggle"
+  onClick={toggleTheme}
+  aria-label="Toggle theme"
+>
+  {theme === "dark" ? "☀️" : "🌙"}
+  </button>
+
   const handleRegister = async (e) => {
     e.preventDefault();
 
     setError("");
     setSuccess("");
     setLoading(true);
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      setLoading(false);
+    return;
+    }
 
     try {
       const response = await fetch(
@@ -60,6 +83,7 @@ function Register() {
   };
 
   return (
+    
     <div className="auth-page">
       <div className="auth-card">
 
@@ -119,39 +143,69 @@ function Register() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="registerPassword">
+            <label htmlFor="password">
               Password
             </label>
 
-            <input
-              id="registerPassword"
-              type="password"
-              placeholder="Create a password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              minLength={6}
-            />
+            <div className="password-input-wrapper">
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                minLength={6}
+              />
+
+              <button
+                type="button"
+                className="password-toggle"
+                onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
           </div>
 
-          <button
-            type="submit"
-            className="auth-button"
-            disabled={loading}
-          >
+          <div className="form-group">
+            <label htmlFor="confirmPassword">
+              Confirm password
+            </label>
+
+            <div className="password-input-wrapper">
+              <input
+                id="confirmPassword"
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirm your password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+                minLength={6}
+              />
+
+              <button
+                type="button"
+                className="password-toggle"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                aria-label={
+                  showConfirmPassword ? "Hide password" : "Show password"
+                }
+              >
+                {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
+          </div>
+
+          <button className="auth-button" type="submit" disabled={loading}>
             {loading ? "Creating account..." : "Create account"}
           </button>
 
+          <p className="auth-footer">
+            Already have an account? <Link to="/login">Login</Link>
+          </p>
         </form>
-
-        <div className="auth-footer">
-          <span>Already have an account?</span>
-
-          <Link to="/login">
-            Sign in
-          </Link>
-        </div>
-
       </div>
     </div>
   );

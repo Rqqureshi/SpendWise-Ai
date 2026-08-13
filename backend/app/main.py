@@ -2,6 +2,8 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import text
 
+from fastapi.staticfiles import StaticFiles
+
 from app.database.database import engine
 
 # Import models (helps SQLAlchemy register them)
@@ -9,7 +11,7 @@ from app.models.user import User
 from app.models.category import Category
 from app.models.expense import Expense
 from app.models.income import Income
-
+from app.models.assistant_message import AssistantMessage
 
 # Import routers
 from app.routers.auth import router as auth_router
@@ -18,6 +20,7 @@ from app.routers.categories import router as category_router
 from app.routers.expenses import router as expense_router
 from app.routers.income import router as income_router
 from app.routers.dashboard import router as dashboard_router
+from app.routers.assistant import router as assistant_router
 
 
 app = FastAPI(
@@ -26,6 +29,11 @@ app = FastAPI(
     version="0.1.0",
 )
 
+app.mount(
+    "/uploads",
+    StaticFiles(directory="uploads"),
+    name="uploads"
+)
 
 # =========================
 # CORS CONFIGURATION
@@ -53,6 +61,7 @@ app.include_router(category_router)
 app.include_router(expense_router)
 app.include_router(income_router)
 app.include_router(dashboard_router)
+app.include_router(assistant_router)
 
 
 @app.get("/")

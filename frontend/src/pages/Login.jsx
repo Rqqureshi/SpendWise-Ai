@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
 function Login() {
   const navigate = useNavigate();
@@ -11,6 +13,18 @@ function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [attempted, setAttempted] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const { theme, toggleTheme } = useTheme();
+
+  <button
+  type="button"
+  className="auth-theme-toggle"
+  onClick={toggleTheme}
+  aria-label="Toggle theme"
+>
+  {theme === "dark" ? "☀️" : "🌙"}
+  </button>
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -100,14 +114,29 @@ function Login() {
               Password
             </label>
 
+          <div className="password-input-wrapper">
             <input
               id="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+
+            <button
+            type="button"
+            className="password-toggle"
+            onClick={() => setShowPassword(!showPassword)}
+            aria-label={showPassword ? "Hide password" : "Show password"}
+          >
+            {showPassword ? (
+              <EyeOff size={20} strokeWidth={1.5} />
+            ) : (
+              <Eye size={20} strokeWidth={1.5} />
+            )}
+          </button>
+            </div>
           </div>
 
           {attempted && error && (

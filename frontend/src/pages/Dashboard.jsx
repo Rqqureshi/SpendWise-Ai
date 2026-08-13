@@ -19,6 +19,7 @@ function Dashboard() {
 
   const [summary, setSummary] = useState(null);
   const [transactions, setTransactions] = useState([]);
+  const [user, setUser] = useState(null);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -64,6 +65,7 @@ function Dashboard() {
           transactionsResponse,
           cashflowResponse,
           categoriesResponse,
+          userResponse,
         ] = await Promise.all([
           fetch(
             "http://127.0.0.1:8000/dashboard/summary",
@@ -100,6 +102,15 @@ function Dashboard() {
               },
             }
           ),
+
+          fetch(
+            "http://127.0.0.1:8000/users/me",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          ),
         ]);
 
         // =========================
@@ -110,7 +121,8 @@ function Dashboard() {
           summaryResponse.status === 401 ||
           transactionsResponse.status === 401 ||
           cashflowResponse.status === 401 ||
-          categoriesResponse.status === 401
+          categoriesResponse.status === 401 ||
+          userResponse.status === 401
         ) {
           localStorage.removeItem("access_token");
           navigate("/login");
@@ -132,6 +144,9 @@ function Dashboard() {
 
         const categoriesData =
           await categoriesResponse.json();
+
+        const userData =
+          await userResponse.json();
 
         // =========================
         // ERROR CHECKING
@@ -170,6 +185,7 @@ function Dashboard() {
         // =========================
 
         setSummary(summaryData);
+        setUser(userData);
 
         // Show only the 5 most recent transactions
         setTransactions(
@@ -217,9 +233,9 @@ function Dashboard() {
 
     pie: [
       "#6366f1",
-      "#8b5cf6",
-      "#ec4899",
       "#f59e0b",
+      "#ec4899",
+      "#8b5cf6",
       "#14b8a6",
       "#3b82f6",
       "#f97316",
@@ -337,17 +353,24 @@ function Dashboard() {
             >
 
               <div className="profile-avatar">
-                U
+                {user?.profile_picture ? (
+                  <img
+                    src={`http://127.0.0.1:8000${user.profile_picture}`}
+                    alt={user.full_name}
+                  />
+                ) : (
+                  "U"
+                )}
               </div>
 
               <div className="profile-info">
 
                 <span className="profile-name">
-                  Account
+                  {user?.full_name || "Account"}
                 </span>
 
                 <span className="profile-role">
-                  Personal
+                  Personal Finance
                 </span>
 
               </div>

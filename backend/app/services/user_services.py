@@ -54,3 +54,18 @@ def authenticate_user(
         return None
 
     return user
+
+
+def update_user(
+    db: Session,
+    user: User,
+    full_name: str,
+    email: str
+):
+    user.full_name = full_name
+    user.email = email
+
+    db.commit()
+    db.refresh(user)
+
+    return user
