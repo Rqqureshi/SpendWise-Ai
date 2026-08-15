@@ -9,6 +9,10 @@ import Expenses from "./pages/Expenses";
 import Transactions from "./pages/Transactions";
 import AIAssistant from "./pages/AIAssistant";
 import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
+import Reports from "./pages/Reports";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 import { ThemeProvider } from "./context/ThemeContext";
 
@@ -63,7 +67,25 @@ function App() {
             element={<AIAssistant />}
           />
 
-          
+          <Route
+            path="/reports"
+            element={<Reports />}
+          />
+
+          <Route
+            path="/settings"
+            element={<Settings />}
+          />
+
+          <Route
+            path="/forgot-password"
+            element={<ForgotPassword />}
+          />
+
+          <Route
+            path="/reset-password"
+            element={<ResetPassword />}
+          />
 
         </Routes>
       </BrowserRouter>

@@ -253,6 +253,13 @@ function Profile() {
       profile_picture: data.profile_picture,
     }));
 
+    // Notify other pages (dashboard) about profile update
+    try {
+      window.dispatchEvent(new CustomEvent("profileUpdated", { detail: data.profile_picture }));
+    } catch (err) {
+      // ignore in non-browser environments
+    }
+
     setSuccess("Profile picture updated successfully.");
   } catch (err) {
     setError(err.message);

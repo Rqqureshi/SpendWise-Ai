@@ -206,6 +206,17 @@ function Dashboard() {
     fetchDashboard();
   }, [navigate]);
 
+  // Listen for profile updates (emitted from Profile page after upload)
+  useEffect(() => {
+    const handler = (e) => {
+      const newUrl = e.detail;
+      setUser((prev) => prev ? { ...prev, profile_picture: newUrl } : prev);
+    };
+
+    window.addEventListener("profileUpdated", handler);
+    return () => window.removeEventListener("profileUpdated", handler);
+  }, []);
+
   // =========================
   // LOGOUT
   // =========================
@@ -353,14 +364,17 @@ function Dashboard() {
             >
 
               <div className="profile-avatar">
-                {user?.profile_picture ? (
-                  <img
-                    src={`http://127.0.0.1:8000${user.profile_picture}`}
-                    alt={user.full_name}
-                  />
-                ) : (
-                  "U"
-                )}
+                {user ? (
+                  // use existing absolute URL pattern to avoid changing API base behavior
+                  user.profile_picture ? (
+                    <img
+                      src={`http://127.0.0.1:8000${user.profile_picture}`}
+                      alt={user.full_name}
+                    />
+                  ) : (
+                    <div className="avatar-initials-small">{(user.full_name || user.email || "User").split(" ").map(s=>s[0]).slice(0,2).join("").toUpperCase()}</div>
+                  )
+                ) : null}
               </div>
 
               <div className="profile-info">

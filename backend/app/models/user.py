@@ -36,6 +36,26 @@ class User(Base):
         nullable=True
     )
 
+    # =========================
+    # PASSWORD RESET
+    # =========================
+
+    reset_token = Column(
+        String(255),
+        nullable=True,
+        unique=True,
+        index=True
+    )
+
+    reset_token_expires = Column(
+        DateTime,
+        nullable=True
+    )
+
+    # =========================
+    # TIMESTAMPS
+    # =========================
+
     created_at = Column(
         DateTime,
         default=datetime.now(timezone.utc),

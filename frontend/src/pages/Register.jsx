@@ -62,10 +62,18 @@ function Register() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(
-          data.detail || "Registration failed."
-        );
+      let message = "Registration failed.";
+
+      if (Array.isArray(data.detail)) {
+        message = data.detail
+          .map((error) => error.msg || "Invalid input.")
+          .join(" ");
+      } else if (typeof data.detail === "string") {
+        message = data.detail;
       }
+
+  throw new Error(message);
+}
 
       setSuccess(
         "Account created successfully. Redirecting to login..."
