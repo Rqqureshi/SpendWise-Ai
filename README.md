@@ -684,47 +684,55 @@ Sensitive files such as `.env` and user-uploaded files are excluded through `.gi
 
 # 📸 Screenshots
 
-Screenshots will be added as the UI is finalized.
-
 ### 🔐 Login
 
-<!-- Add screenshot here -->
+<img width="1363" height="680" alt="image" src="https://github.com/user-attachments/assets/4b4f5e58-275d-4fcf-a578-bb66c81c052e" />
+
+### 🔑 Forgot Password
+
+<img width="1405" height="701" alt="image" src="https://github.com/user-attachments/assets/32d980bd-0e3e-4ec8-aa89-6e05160d6420" />
 
 ### 📝 Registration
 
-<!-- Add screenshot here -->
+<img width="1343" height="687" alt="image" src="https://github.com/user-attachments/assets/43ec593d-2189-43b4-bed6-328e0f3b4909" />
 
 ### 📊 Dashboard
 
-<!-- Add screenshot here -->
+<img width="1353" height="639" alt="image" src="https://github.com/user-attachments/assets/0b8e9b0e-73d4-4b50-adb8-294eeec5465e" />
+
+<img width="1358" height="644" alt="image" src="https://github.com/user-attachments/assets/ed84b088-c600-40df-b789-4d74355fee3b" />
 
 ### 💰 Income Management
 
-<!-- Add screenshot here -->
+<img width="1358" height="643" alt="image" src="https://github.com/user-attachments/assets/4f8f55f6-6065-4a72-84d4-eedc066cb36c" />
 
 ### 💸 Expense Management
 
-<!-- Add screenshot here -->
+<img width="1359" height="644" alt="image" src="https://github.com/user-attachments/assets/eb237537-620e-4f25-863a-05db6d9652df" />
 
 ### 🔄 Transactions
 
-<!-- Add screenshot here -->
+<img width="1359" height="644" alt="image" src="https://github.com/user-attachments/assets/289304a1-5a56-4401-b780-77f99953b190" />
 
 ### 📈 Financial Reports
 
-<!-- Add screenshot here -->
+<img width="1354" height="684" alt="image" src="https://github.com/user-attachments/assets/4c437a80-f361-4d36-a743-3f8ff583f7f2" />
+
+<img width="1355" height="689" alt="image" src="https://github.com/user-attachments/assets/4291e564-1fc1-4e6d-8b0c-59e36a578d3b" />
 
 ### 🤖 AI Assistant
 
-<!-- Add screenshot here -->
+<img width="1360" height="644" alt="image" src="https://github.com/user-attachments/assets/5abffb72-55c6-423d-8134-3fcb36f02c4a" />
 
 ### 👤 Profile
 
-<!-- Add screenshot here -->
+<img width="1366" height="643" alt="image" src="https://github.com/user-attachments/assets/0c5ad1ff-a3e6-4429-b740-a58f6e0e852c" />
 
 ### ⚙️ Settings
 
-<!-- Add screenshot here -->
+<img width="1366" height="643" alt="image" src="https://github.com/user-attachments/assets/fa4a8a66-36fb-4ffb-8a21-d1ee5d6bfb40" />
+
+<img width="1363" height="641" alt="image" src="https://github.com/user-attachments/assets/89d313a9-54de-4158-80f1-0843973e83a4" />
 
 ---
 
